@@ -10,8 +10,10 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import{useSelector} from 'react-redux'
+import{useDispatch, useSelector} from 'react-redux'
+import { authActions } from "../store";
 const Header = () => {
+    const dispath =useDispatch();
     const isLoggedIn =useSelector(state => state.isLoggedIn);
   const [value, setValue] = useState();
   return (
@@ -32,6 +34,7 @@ const Header = () => {
           >
             <Tab LinkComponent={Link} to="/blogs" label="All Blogs" />
             <Tab LinkComponent={Link} to="/myBlogs" label="My Blogs" />
+            <Tab LinkComponent={Link} to="/blogs/add" label="Add Blog" />
           </Tabs>
         </Box>}
         <Box sx={{ Display: "Flex", marginLeft: "auto" }}>
@@ -57,6 +60,9 @@ const Header = () => {
             Signup
           </Button></> }
          {isLoggedIn && <Button
+            onClick={()=>dispath(authActions.logout())}
+            LinkComponent={Link}
+            to="/auth"
             variant="contained"
             sx={{ background: "black", borderRadius: "20px", fontSize: "15px" }}
           >
