@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { Box } from "@mui/system";
-import { InputLabel, TextField, Typography,Button } from "@mui/material";
+import { InputLabel, TextField, Typography, Button } from "@mui/material";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
+import { useStyles } from "./utils";
 
 const AddBlog = () => {
+  const classes = useStyles();
+  const navigate = useNavigate();
   const labelStyles = { mb: 1, mt: 2, fontSize: "24px", fontWeight: "bold" };
   const [inputs, setInputs] = useState({
     title: "",
@@ -34,6 +37,7 @@ const AddBlog = () => {
     console.log(inputs);
     sendRequest()
       .then((data) => console.log(data))
+      .then(() => navigate("/blogs"));
   };
   return (
     <div>
@@ -53,6 +57,7 @@ const AddBlog = () => {
           width="80%"
         >
           <Typography
+            classsName={classes.font}
             fontWeight={"bold"}
             padding={3}
             color="Black"
@@ -79,13 +84,19 @@ const AddBlog = () => {
           />
           <InputLabel sx={labelStyles}>ImageURL</InputLabel>
           <TextField
-            value={inputs.imageURL}
             name="imageURL"
             onChange={handleChange}
-            margin="normal"
+            value={inputs.imageURL}
+            margin="auto"
             variant="outlined"
           />
-         <Button type="submit" sx={{color:"white",fontSize:"larger", background: "black", borderRadius: "20px", fontSize: "15px" }}>Submit</Button>
+          <Button
+             sx={{ mt: 2, borderRadius: 4 ,background: "linear-gradient(90deg, rgba(22,15,47,1) 0%, rgba(89,21,187,0.9486388305322129) 35%, rgba(11,11,143,1) 100%)"}}
+             variant="contained"
+             type="submit"
+          >
+            Submit
+          </Button>
         </Box>
       </form>
     </div>

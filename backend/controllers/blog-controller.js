@@ -67,7 +67,7 @@ export const getById=async(req,res,next)=>{
    const id =req.params.id;
    let blog;
    try{
-     blog=await Blog.findById(id);
+    blog = await Blog.findById(id);
    }catch(err){
     return console.log(err);
    }
@@ -105,5 +105,5 @@ export const getByUserId=async(req,res,next)=>{
   if(!userBlogs){
     return res.status(404).json({message:"No Blogs Found"})
   }
-  return res.status(200).json({blogs:userBlogs})
+  return res.status(200).json({user:userBlogs})
 }
